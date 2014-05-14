@@ -1,6 +1,10 @@
 //Set up for communication with the webpage over http
 // var http = require('http');
 // var server = http.createServer(function(request) {});
+//Set up expressjs to serve the webpage
+var express = require("express");
+var app = express();
+
 var http = require('http');
 
 app.use(express.static(__dirname + '/'));
@@ -195,10 +199,6 @@ function requestWaypoint(wpId) {
         console.log("SENT REQUEST FOR WP " + wpId+ "\n \n \n");
     });
 };
-
-//Set up expressjs to serve the webpage
-var express = require("express");
-var app = express();
 
  app.configure(function() {
     app.use(express.json());
