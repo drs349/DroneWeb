@@ -1,6 +1,6 @@
 //Set up for communication with the webpage over http
-var http = require('http');
-var server = http.createServer(function(request) {});
+// var http = require('http');
+// var server = http.createServer(function(request) {});
 
 //Set up for communication with our matlab server
 var net = require('net');
@@ -219,19 +219,29 @@ app.get("/sendMissionCount", function(req, res) {
 }); 
 
 //Start listening for connections from the web
-server.listen(1234, function() {
-    console.log((new Date()) + ' Server is listening on port 1234');
-});
+// server.listen(1234, function() {
+//     console.log((new Date()) + ' Server is listening on port 1234');
+// });
 
-app.listen(process.env.PORT || 3000)
+var http = require('http');
+
+app.use(express.static(__dirname + '/'));
+
+var server = http.createServer(app);
+
+server.listen(process.env.PORT);
+
+// app.listen(process.env.PORT || 3000)
 
 console.log("Express started on " + process.env.PORT);
 //Initialize WebSocketServer to accept connections from js client-side
-var WebSocketServer = require('websocket').server;
-wsServer = new WebSocketServer({
-    httpServer: server
-});
+// var WebSocketServer = require('websocket').server;
+// wsServer = new WebSocketServer({
+//     httpServer: server
+// });
 
+var WebSocketServer = require('websocket').server;
+var wsServer = new WebSocketServer({httpServer: server});
 //Keep track of connected clients
 var count  = 0;
 var clients = {};
