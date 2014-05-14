@@ -223,7 +223,7 @@ server.listen(1234, function() {
     console.log((new Date()) + ' Server is listening on port 1234');
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000)
 
 //Initialize WebSocketServer to accept connections from js client-side
 var WebSocketServer = require('websocket').server;
