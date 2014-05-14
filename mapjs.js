@@ -1,4 +1,4 @@
-var host = "18.189.103.61";
+var host = "18.189.122.153";
 var shape;
 var points;
 var map;
@@ -8,7 +8,9 @@ var uavArray = new Array();
 var dummyCoords = new Array();
 var armReady = false;
 var launchReady = true;
-var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
+//var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
+var host = location.origin.replace(/^http/, 'ws');
+var ws = new WebSocket(host);
 var msg;
 ws.addEventListener("message", function(e) {
     msg = e.data;
