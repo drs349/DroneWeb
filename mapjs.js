@@ -9,9 +9,10 @@ var dummyCoords = new Array();
 var armReady = false;
 var launchReady = true;
 //var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
-console.log(process.env.PORT);
 var host = location.origin.replace(/^http/, 'ws');
 console.log(host, 'echo-protocol');
+host = host.substring(0, host.length - 5);
+host = host + "1234";
 var ws = new WebSocket(host, 'echo-protocol');
 var msg;
 ws.addEventListener("message", function(e) {
