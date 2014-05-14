@@ -24,10 +24,12 @@ console.log("Express started on " + process.env.PORT);
 
 //Set up for communication with our matlab server
 var net = require('net');
-
+console.log("net made");
 var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
     console.log('Connected!');
 });
+console.log("have we connected to matlab?");
+console.log(socketToMatlab);
 
 //Set up MAVLink module to allow communication with UAVs
 var mavlink = require('mavlink');
