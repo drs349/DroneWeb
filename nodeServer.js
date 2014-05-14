@@ -5,7 +5,7 @@ var server = http.createServer(function(request) {});
 //Set up for communication with our matlab server
 var net = require('net');
 
-var socketToMatlab = net.createConnection('55000', 'localhost', function() {
+var socketToMatlab = net.createConnection('55000', '18.189.78.49', function() {
     console.log('Connected!');
 });
 
