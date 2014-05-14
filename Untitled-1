@@ -1,0 +1,45 @@
+//Creates the get drop points button, opens up a window containing the drop points.
+ var getButton = document.createElement('DIV');
+    getButton.className = 'getButton';
+    
+    getButton.innerHTML = 'View Drop Points';
+    getButton.index = 1;
+    
+    google.maps.event.addDomListener(getButton, 'click', function(){
+     
+        getPoints();
+    
+    });
+    
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(getButton);
+    
+    
+//Creates UAV Status button
+    var statusButton = document.createElement('DIV');
+    statusButton.className = 'statusButton';
+    
+    statusButton.innerHTML = 'View UAV Status';
+    statusButton.index = 1;
+    
+    google.maps.event.addDomListener(statusButton, 'click', function(){
+     
+        $(".uavDialog").dialog("open");
+    
+    });
+    
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(statusButton);
+    
+//Creates Solve drop points button
+    var solveButton = document.createElement('DIV');
+    solveButton.className = 'solveButton';
+    
+    solveButton.innerHTML = 'Solve Drop Points';
+    solveButton.index = 1;
+    
+    google.maps.event.addDomListener(solveButton, 'click', function(){
+     
+        alert("Pretend it is solving");
+    
+    });
+    
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(solveButton);

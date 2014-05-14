@@ -1,0 +1,59 @@
+ <html>
+    <head>
+        <title>
+            Location
+        </title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+        </script>
+        <script type="text/javascript">
+       
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+     navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  
+  }
+function showPosition(position)
+  {
+    document.getElementById("lat").value = position.coords.latitude;
+    document.getElementById("lng").value = position.coords.longitude;     
+  }
+
+                      
+    getLocation();
+    
+    
+        </script>
+    </head>
+    <body background="bg.png">
+        <div class="loginform">
+            <form name="location" method = "get" action="inputs.html">
+                <h1 style="margin-top:50px">Location</h1>
+                
+                <br/>
+                <br/>
+                <br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latitude: <input id = "lat" type="text" name="lat">
+                <br/>
+                
+                <br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Longitude: <input id="lng" type="text" name="long"> 
+                    
+                <br/>
+                <br/>
+               <input id ="rad" type="hidden" name="rad">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+             
+              <input class= "confbutton" type = "submit" value="Confirm"/> 
+    
+            </form>
+        </div>
+    </body>
+</html>

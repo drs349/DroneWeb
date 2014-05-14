@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+      <link rel="stylesheet" type="text/css" href="main.css">
+      
+      <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+      <script type = 'text/javascript' src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTh8JVT0cZF-wT0O456n8jx2oEJjFlrBU&sensor=true">
+    </script>
+   
+      <script type="text/javascript" src="mapjs.js"></script>
+    
+  </head>
+  <body onselectstart="return false;">
+      <div class="pointsDialog">
+      &nbsp;&nbsp;&nbsp;&nbsp;Boundary Points
+      </div>
+      <div class = "uavDialog">
+         
+         
+     
+          
+      
+      </div>
+      <div class = "initInfo">
+      Left click to set boundary points.
+      </div>
+      <div class = "polyCommands">
+      
+      
+      </div>
+      
+      <div class = "solvDialog">
+      Solving for drop points.
+      </div>
+    <div id="map-canvas">
+      
+        </div>
+ 
+  </body>
+</html>

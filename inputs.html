@@ -1,0 +1,113 @@
+ <html>
+    <head>
+        <title>
+            Inputs
+        </title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        </script>
+         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+      <script type = 'text/javascript' src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    </head>
+    <body background="bg.png">
+        <div class="loginform">
+            <form name="inputs" method = "get"  action="map.html">
+                <h1>Inputs</h1>
+                
+                <br/>
+                <input type = "hidden" id = "lat" name = "lat">
+                <input type = "hidden" id = "lng" name = "lng">
+                <input type = "hidden" id = "rad" name = "rad">
+                
+                Chemical: 
+                <select name="chem" id = "chem_select">
+                    <option value = "chem1">Transfluthrin</option>
+                    <option value = "chem2">Metofluthrin</option>
+                    <option value = "chem3">DEET</option>
+
+                </select>
+                <br/>
+                <br/>
+                Temperature (C):&nbsp; <input type="text" name="temp" id = "temp" style="background-color:rgba(0,0,0,0);border:none">
+                <div id="slider_temp" style="width:100px"></div>
+                <br/>
+                <br/>
+                
+               <a class = "arrowleft" href="location.html" ><b>&#60;</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
+                
+                Humidity (%): 
+                <input type="text" id ="humid" name="humid" value = '0'>
+                <div id = "slider_humid" style = "width:100px"></div>
+                    
+                <br/>
+                <br/>
+                Wind (m/s): <input type="text" name="wind" value = '0' id = "wind" style="background-color:rgba(0,0,0,0);border:none;">
+                <div id = "slider_wind" style = "width:100px"></div>
+                <br/>
+                <br/>
+                 &nbsp;<input type="hidden" name="mwa" value="None">
+                <br/>
+                <br/>
+                <br/>
+     
+               <input class= "confbutton" type = "submit" value="Confirm"/> 
+           
+            </form>
+           
+        </div>
+    </body>
+    <script type="text/javascript">
+        var url = window.location.href;
+        var parts = url.split('?');
+        var qstring = parts[1];
+        var qstringparts = qstring.split('&');
+        var queries = new Array();
+        for (var i = 0; i<qstringparts.length; i++)
+        {     
+            queries[i] = qstringparts[i].split('=');
+          
+        }
+     var lat = document.getElementById("lat");
+        lat.value = queries[0][1];
+    var lng = document.getElementById("lng");
+        lng.value = queries[1][1]
+    var rad = document.getElementById("rad");
+        rad.value = queries[2][1];
+        
+     //ADD SLIDERS
+
+     $( "#slider_temp" ).slider({
+      value:15,
+      min: 15,
+      max: 40,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#temp" ).val( ui.value );
+      }
+    });
+    $( "#temp" ).val(  $( "#slider_temp" ).slider( "value" ) );
+
+    $( "#slider_humid" ).slider({
+      value:0,
+      min: 50,
+      max: 90,
+      step: 5,
+      slide: function( event, ui ) {
+        $( "#humid" ).val( ui.value );
+      }
+    });
+    $( "#humid" ).val(  $( "#slider_humid" ).slider( "value" ) );
+
+    $( "#slider_wind" ).slider({
+      value:0,
+      min: 0,
+      max: 2,
+      step: 0.25,
+      slide: function( event, ui ) {
+        $( "#wind" ).val( ui.value );
+      }
+    });
+    $( "#wind" ).val(  $( "#slider_wind" ).slider( "value" ) );
+
+        </script>
+</html>

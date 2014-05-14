@@ -1,0 +1,31 @@
+{
+  "name": "ISNDroneProject",
+  "version": "0.0.1",
+  "description": "The web app for the drone project at the ISN, Elman Group",
+  "main": "nodeServer.js",
+  "dependencies": {
+    "express": "~3.5.1",
+    "mavlink": "~1.0.1",
+    "serialport": "~1.3.1",
+    "websocket": "~1.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhandley/ISNDroneProject.git"
+  },
+  "keywords": [
+    "ISN",
+    "drone",
+    "NodeJs"
+  ],
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mhandley/ISNDroneProject/issues"
+  },
+  "homepage": "https://github.com/mhandley/ISNDroneProject"
+}
