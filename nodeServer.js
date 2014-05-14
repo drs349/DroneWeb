@@ -28,8 +28,16 @@ console.log("net made");
 var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
     console.log('Connected!');
 });
-console.log("have we connected to matlab?");
-console.log(socketToMatlab);
+
+var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
+    console.log('Connected!');
+});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
+    console.log('Connected!');
+});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
+    console.log('Connected!');
+});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
+    console.log('Connected!');
+});
 
 //Set up MAVLink module to allow communication with UAVs
 var mavlink = require('mavlink');
