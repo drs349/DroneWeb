@@ -25,17 +25,7 @@ console.log("Express started on " + process.env.PORT);
 //Set up for communication with our matlab server
 var net = require('net');
 console.log("net made");
-var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
-    console.log('Connected!');
-});
-
-var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
-    console.log('Connected!');
-});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
-    console.log('Connected!');
-});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
-    console.log('Connected!');
-});var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
+var socketToMatlab = net.createConnection('55000', '10.189.95.255', function() {
     console.log('Connected!');
 });
 
