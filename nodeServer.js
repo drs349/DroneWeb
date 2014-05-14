@@ -219,12 +219,13 @@ app.get("/sendMissionCount", function(req, res) {
 }); 
 
 //Start listening for connections from the web
-server.listen(process.env.PORT, function() {
+server.listen(1234, function() {
     console.log((new Date()) + ' Server is listening on port 1234');
 });
 
 app.listen(process.env.PORT || 3000)
 
+console.log("Express started on " + process.env.PORT);
 //Initialize WebSocketServer to accept connections from js client-side
 var WebSocketServer = require('websocket').server;
 wsServer = new WebSocketServer({
