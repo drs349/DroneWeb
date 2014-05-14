@@ -219,7 +219,7 @@ app.get("/sendMissionCount", function(req, res) {
 }); 
 
 //Start listening for connections from the web
-server.listen(1234, function() {
+server.listen(process.env.PORT, function() {
     console.log((new Date()) + ' Server is listening on port 1234');
 });
 

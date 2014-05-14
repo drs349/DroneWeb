@@ -1,5 +1,5 @@
 
-tcpipServer = tcpip('0.0.0.0', 8080, 'NetworkRole', 'Server');
+tcpipServer = tcpip('0.0.0.0', 55000, 'NetworkRole', 'Server');
 set(tcpipServer, 'InputBufferSize', 10000);
 set(tcpipServer, 'Timeout', 30);
 set(tcpipServer, 'OutputBufferSize', 40000);
