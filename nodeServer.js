@@ -5,7 +5,7 @@
 //Set up for communication with our matlab server
 var net = require('net');
 
-var socketToMatlab = net.createConnection('55000', '18.189.78.49', function() {
+var socketToMatlab = net.createConnection('55000', '10.189.78.57', function() {
     console.log('Connected!');
 });
 
@@ -16,11 +16,6 @@ var SerialPort = require('serialport').SerialPort;
 //var serialPort = new SerialPort("/dev/tty.usbmodemfd121", {baudrate: 115200});
 
 var mav = new mavlink(1,1);
-
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-  var ip = add;
-});
-
 
 //Waypoint sample. Actual processing will be similar. Retrieved from MATLAB and stored
 // in a global var
