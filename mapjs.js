@@ -226,8 +226,9 @@ function sendPoints(){
     $.ajax({
       url: location.origin + "/tryJson",
       type: 'POST',
-      dataType: "text",
+      dataType: "text/plain",
      // jsonpCallback: "jsonSuccess",
+      contentType: "text/plain",
       data: verticesString,
       cache: false,
       timeout: 5000,
