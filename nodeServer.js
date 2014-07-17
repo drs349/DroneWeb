@@ -290,7 +290,7 @@ function sendCompleteData() {
     completeData = String(completeData);
     //Format result string for parsing
    // completeData = completeData.replace('[', "").replace(']', "").replace(/;/g," "); 
-    completeData = completeData.replace(/\[/g, "").replace(/,/g, "").replace(/\]/g, "").replace(/\'/g, ""); 
+    completeData = completeData.replace(/\[/g, "").replace(/,/g, "").replace(/\]/g, "").replace(/\'/g, "").replace(/;/g, " "); 
     resultAsArray = completeData.split(" ");
     var recipient = resultAsArray.pop();
     console.log("recipient is " + recipient);

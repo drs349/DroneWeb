@@ -224,11 +224,6 @@ function sendPoints(){
     }       
     ws.send(verticesString);
 }
-
-function jsonSuccess(data) {
-  console.log("there was a jsonSucces");
-  console.log(data);
-}
 //what happens when you click the solve for drop points button
 function solvePoints(){
     //make it impossible to edit the polygon anymore
