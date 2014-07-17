@@ -231,9 +231,10 @@ function sendPoints(){
       data: verticesString,
       cache: false,
       timeout: 5000,
-      success: function(response) {
+      success: function(data, textStatus, jqXHR) {
         console.log("got a success");
-        console.log(response.body);
+        console.log(data);
+        console.log(textStatus);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           alert('error ' + textStatus + " " + errorThrown);
