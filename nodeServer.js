@@ -209,7 +209,7 @@ function requestWaypoint(wpId) {
 
 require('./routes.js')(app); //Load webpage routes
 
-app.post("/testJson", function(req, res) {
+app.post("/tryJson", function(req, res) {
     console.log("ajax request received!!");
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('successJson(\'randomString\')');
