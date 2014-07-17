@@ -212,7 +212,7 @@ function isTouchSupported() {
 //Solves for drop points 
 //Sends the boundary points to the server
 function sendPoints(){
-    console.log("sent");
+   
     var vertices = shape.getPath();
     var verticesArray = vertices.getArray();
     var verticesString = '';
@@ -225,17 +225,22 @@ function sendPoints(){
     //ws.send(verticesString);
     $.ajax({
       url: host,
-      dataType: "text",
+      dataType: "jsonp",
+      jsonpCallback: "",
       cache: false,
       timeout: 5000,
       success: function(data) {
-          console.log("success!");
-          console.log(data);
-          },
+        console.log("got a success")
+      },
       error: function(jqXHR, textStatus, errorThrown) {
           alert('error ' + textStatus + " " + errorThrown);
       }
   });  
+}
+
+function jsonSuccess(data) {
+  console.log("there was a jsonSucces");
+  console.log(data);
 }
 //what happens when you click the solve for drop points button
 function solvePoints(){
