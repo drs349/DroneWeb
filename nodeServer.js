@@ -1,3 +1,4 @@
+require('newrelic');
 //Set up for communication with the webpage over http
 // var http = require('http');
 // var server = http.createServer(function(request) {});
@@ -11,9 +12,7 @@ app.use(express.static(__dirname + '/'));
 
 var server = http.createServer(app);
 
-server.listen(process.env.PORT);
-
-// app.listen(process.env.PORT || 3000)
+server.listen(process.env.PORT || 3000);
 
 console.log("Express started on " + process.env.PORT);
 //Initialize WebSocketServer to accept connections from js client-side
@@ -39,14 +38,14 @@ var mav = new mavlink(1,1);
 
 //Waypoint sample. Actual processing will be similar. Retrieved from MATLAB and stored
 // in a global var
-var sampleWaypointMsg = "32.19643 -71.94730 32.9846 -72.11100 54.22009 -71.978900";
-var waypointArray = sampleWaypointMsg.split(" ");
-var points = {}
-for (var i = 0; i < (waypointArray.length)*5 ; i ++) {
-    points[i/2] = [waypointArray[i], waypointArray[i+1]];
-    i++;
-}
-var numPoints = waypointArray.length/2;
+// var sampleWaypointMsg = "32.19643 -71.94730 32.9846 -72.11100 54.22009 -71.978900";
+// var waypointArray = sampleWaypointMsg.split(" ");
+// var points = {}
+// for (var i = 0; i < (waypointArray.length)*5 ; i ++) {
+//     points[i/2] = [waypointArray[i], waypointArray[i+1]];
+//     i++;
+// }
+// var numPoints = waypointArray.length/2;
 
 //State machine for message sending. Runs through all the actions required
 // for each waypoint
@@ -255,7 +254,11 @@ wsServer.on('request', function(request){
         var msgString = message.utf8Data;
         console.log('received message: %s', msgString);
         console.log('Client ID is %s', connection.id);
-        socketToMatlab.write(msgString + " " + connection.id);
+        socketToMatlab.write(msgString + " " + connection.id, function(msg) {
+            console.log("claim it was written");
+            console.log(msg);
+        });
+        console.log("written");
     });
 
     connection.on('close', function(reasonCode, description) {
@@ -279,7 +282,8 @@ function sendCompleteData() {
     console.log('Received message: ' + completeData);
     completeData = String(completeData);
     //Format result string for parsing
-    completeData = completeData.replace('[', "").replace(']', "").replace(/;/g," "); 
+   // completeData = completeData.replace('[', "").replace(']', "").replace(/;/g," "); 
+    completeData = completeData.replace(/\[/g, "").replace(/,/g, "").replace(/\]/g, "").replace(/\'/g, ""); 
     resultAsArray = completeData.split(" ");
     var recipient = resultAsArray.pop();
     console.log("recipient is " + recipient);

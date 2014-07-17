@@ -1,4 +1,4 @@
-var host = "18.189.122.153";
+var host = "192.168.1.174";
 var shape;
 var points;
 var map;
@@ -8,13 +8,14 @@ var uavArray = new Array();
 var dummyCoords = new Array();
 var armReady = false;
 var launchReady = true;
-//var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
-var host = location.origin.replace(/^http/, 'wss');
+// var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
+var host = location.origin.replace(/^http/, 'ws');
 console.log(host, 'echo-protocol');
 var ws = new WebSocket(host, 'echo-protocol');
 var msg;
 ws.addEventListener("message", function(e) {
     msg = e.data;
+    console.log(msg);
 });
 // msg = "42.358730 -71.091906 42.358835 -71.091662 42.358730 -71.091731";
 
@@ -211,7 +212,7 @@ function isTouchSupported() {
 //Solves for drop points 
 //Sends the boundary points to the server
 function sendPoints(){
-   
+    console.log("sent");
     var vertices = shape.getPath();
     var verticesArray = vertices.getArray();
     var verticesString = '';
@@ -221,7 +222,20 @@ function sendPoints(){
         var long = Math.round(verticesArray[i].lng()*10000)/10000;
         verticesString += lat.toString() + " " + long.toString() + " ";
     }       
-    ws.send(verticesString);
+    //ws.send(verticesString);
+    $.ajax({
+      url: host,
+      dataType: "text",
+      cache: false,
+      timeout: 5000,
+      success: function(data) {
+          console.log("success!");
+          console.log(data);
+          },
+      error: function(jqXHR, textStatus, errorThrown) {
+          alert('error ' + textStatus + " " + errorThrown);
+      }
+  });  
 }
 //what happens when you click the solve for drop points button
 function solvePoints(){
