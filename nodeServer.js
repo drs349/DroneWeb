@@ -209,6 +209,12 @@ function requestWaypoint(wpId) {
 
 require('./routes.js')(app); //Load webpage routes
 
+app.post("/testJson", function(req, res) {
+    console.log("ajax request received!!");
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('successJson(\'randomString\')');
+});
+
 //Some GET actions for easy testing/debugging
 app.get("/getMission", function(req, res) {
     for (var i = 0; i < numPoints; i++){
@@ -254,10 +260,7 @@ wsServer.on('request', function(request){
         var msgString = message.utf8Data;
         console.log('received message: %s', msgString);
         console.log('Client ID is %s', connection.id);
-        socketToMatlab.write(msgString + " " + connection.id, function(msg) {
-            console.log("claim it was written");
-            console.log(msg);
-        });
+        socketToMatlab.write(msgString + " " + connection.id);
         console.log("written");
     });
 

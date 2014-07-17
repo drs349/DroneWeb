@@ -224,9 +224,10 @@ function sendPoints(){
     }       
     //ws.send(verticesString);
     $.ajax({
-      url: host,
+      url: host + "/tryJson",
+      type: 'POST',
       dataType: "jsonp",
-      jsonpCallback: "",
+      jsonpCallback: "jsonSuccess",
       cache: false,
       timeout: 5000,
       success: function(data) {
