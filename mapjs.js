@@ -228,10 +228,12 @@ function sendPoints(){
       type: 'POST',
       dataType: "text",
      // jsonpCallback: "jsonSuccess",
+      data: verticesString,
       cache: false,
       timeout: 5000,
       success: function(data) {
-        console.log("got a success")
+        console.log("got a success");
+        console.log(data);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           alert('error ' + textStatus + " " + errorThrown);
