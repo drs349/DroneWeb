@@ -229,7 +229,7 @@ function sendPoints(){
       dataType: "text",
      // jsonpCallback: "jsonSuccess",
       contentType: "text",
-      data: verticesString,
+      data: JSON.stringify("points: " + verticesString),
       cache: false,
       timeout: 5000,
       success: function(data, textStatus, jqXHR) {

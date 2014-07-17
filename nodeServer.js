@@ -214,7 +214,8 @@ app.post("/tryJson", function(req, res) {
     console.log(req.data);
     console.log(req.body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('hey');
+    
+    res.end(req.data);
 });
 
 //Some GET actions for easy testing/debugging
