@@ -222,25 +222,7 @@ function sendPoints(){
         var long = Math.round(verticesArray[i].lng()*10000)/10000;
         verticesString += lat.toString() + " " + long.toString() + " ";
     }       
-    //ws.send(verticesString);
-    $.ajax({
-      url: location.origin + "/tryJson",
-      type: 'POST',
-      dataType: "text",
-     // jsonpCallback: "jsonSuccess",
-      contentType: "text",
-      data: JSON.stringify("points: " + verticesString),
-      cache: false,
-      timeout: 5000,
-      success: function(data, textStatus, jqXHR) {
-        console.log("got a success");
-        console.log(data);
-        console.log(textStatus);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-          alert('error ' + textStatus + " " + errorThrown);
-      }
-  });  
+    ws.send(verticesString);
 }
 
 function jsonSuccess(data) {

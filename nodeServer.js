@@ -212,7 +212,7 @@ require('./routes.js')(app); //Load webpage routes
 app.post("/tryJson", function(req, res) {
     console.log("ajax request received!!");
     console.log(req.data);
-    console.log(JSON.parse(req.data))
+    console.log(JSON.parse(req.gdata))
     console.log(req.body);
     res.writeHead(200, {'Content-Type': 'text/plain'});
     
