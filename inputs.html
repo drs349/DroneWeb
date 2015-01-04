@@ -6,20 +6,20 @@
         <link rel="stylesheet" type="text/css" href="main.css">
 
         </script>
-         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-      <script type = 'text/javascript' src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+         <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+      <script type = 'text/javascript' src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     </head>
     <body background="bg.png">
         <div class="loginform">
             <form name="inputs" method = "get"  action="map.html">
                 <h1>Inputs</h1>
-                
+
                 <br/>
                 <input type = "hidden" id = "lat" name = "lat">
                 <input type = "hidden" id = "lng" name = "lng">
                 <input type = "hidden" id = "rad" name = "rad">
-                
-                Chemical: 
+
+                Chemical:
                 <select name="chem" id = "chem_select">
                     <option value = "chem1">Transfluthrin</option>
                     <option value = "chem2">Metofluthrin</option>
@@ -32,13 +32,13 @@
                 <div id="slider_temp" style="width:100px"></div>
                 <br/>
                 <br/>
-                
+
                <a class = "arrowleft" href="location.html" ><b>&#60;</b></a> &nbsp;&nbsp;&nbsp;&nbsp;
-                
-                Humidity (%): 
+
+                Humidity (%):
                 <input type="text" id ="humid" name="humid" value = '0'>
                 <div id = "slider_humid" style = "width:100px"></div>
-                    
+
                 <br/>
                 <br/>
                 Wind (m/s): <input type="text" name="wind" value = '0' id = "wind" style="background-color:rgba(0,0,0,0);border:none;">
@@ -49,11 +49,11 @@
                 <br/>
                 <br/>
                 <br/>
-     
-               <input class= "confbutton" type = "submit" value="Confirm"/> 
-           
+
+               <input class= "confbutton" type = "submit" value="Confirm"/>
+
             </form>
-           
+
         </div>
     </body>
     <script type="text/javascript">
@@ -63,9 +63,9 @@
         var qstringparts = qstring.split('&');
         var queries = new Array();
         for (var i = 0; i<qstringparts.length; i++)
-        {     
+        {
             queries[i] = qstringparts[i].split('=');
-          
+
         }
      var lat = document.getElementById("lat");
         lat.value = queries[0][1];
@@ -73,7 +73,7 @@
         lng.value = queries[1][1]
     var rad = document.getElementById("rad");
         rad.value = queries[2][1];
-        
+
      //ADD SLIDERS
 
      $( "#slider_temp" ).slider({
