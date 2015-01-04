@@ -9,7 +9,7 @@ var dummyCoords = new Array();
 var armReady = false;
 var launchReady = true;
 // var ws = new WebSocket('ws://' + host + ':1234', 'echo-protocol');
-var host = location.origin.replace(/^http/, 'ws');
+var host = location.origin.replace(/^http/, 'wss');
 console.log(host, 'echo-protocol');
 var ws = new WebSocket(host, 'echo-protocol');
 var msg;
@@ -34,7 +34,7 @@ function initialize(){
     var lng = allq[1][1];
     var rad = allq[2][1];
     var zvalue = 19;
-    
+
     //setting up the actual map
     var mapOptions = {
         center: new google.maps.LatLng(lat, lng),
@@ -50,14 +50,14 @@ function initialize(){
             fillColor: '#ff0000',
             fillOpacity: 0.35,
             editable:true,
-            draggable:false,  
-        });  
+            draggable:false,
+        });
     shape.setMap(map);
     google.maps.event.addListener(map, 'click', addPoint);
     google.maps.event.addListener(shape, 'dblclick', removePoint);
     google.maps.event.addListener(shape, 'mousedown', function (event) {
     if (event.vertex || event.path || event.edge) {
-     
+
         map.setOptions({draggable: false});
     }
     });
@@ -69,9 +69,9 @@ function initialize(){
    {
     map.setOptions({panControl:true});
    }
- 
-   
-     
+
+
+
    //Creates the back button
     var backButton = document.createElement('DIV');
     backButton.className = 'backButton';
@@ -80,19 +80,19 @@ function initialize(){
     google.maps.event.addDomListener(backButton, 'click', function() {
         window.location = 'inputs.html' +'?' + qstring[1];
     });
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(backButton); 
-    
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(backButton);
+
 //Styling the various dialogs
     var height = document.body.clientHeight;
-    var width = document.body.clientWidth; 
-//Styles the drop points dialog popup    
+    var width = document.body.clientWidth;
+//Styles the drop points dialog popup
     $( '.pointsDialog' ).dialog({
         autoOpen:false,
         closeText:"x",
         close: function(event,ui){
           $('.polyCommands').dialog("open");
         },
-        
+
        draggable:false,
        clickable:false,
        height:400,
@@ -100,10 +100,10 @@ function initialize(){
         position:{my: "right center", at:"right bottom", of:$('#map-canvas')},
        dialogClass: "ui-points",
        show:{effect:'fade', duration: 350},
-       hide:{effect:'fade',duration:350}  
+       hide:{effect:'fade',duration:350}
     });
-    
-//styles the UAV status popup  
+
+//styles the UAV status popup
    $( '.uavDialog').dialog({
        autoOpen:false,
        closeText:"x",
@@ -111,12 +111,12 @@ function initialize(){
             $('.polyCommands').dialog("open");
        },
        buttons:
-       [{    
+       [{
            text:"Launch UAVs",
            click:function()
-           {   k=0;            
+           {   k=0;
                setInterval(function(){ mark(k); moveUAV(k);k++;}, 100);
-              
+
                $('.uavDialog').dialog('close');
            },
            class:"ui-button-3"
@@ -128,10 +128,10 @@ function initialize(){
        dialogClass:"ui-uav",
        show:{effect:'fade', duration: 350},
        hide:{effect:'fade',duration:350},
-       position:{ my: "center bottom", at: "center bottom", of:document} 
+       position:{ my: "center bottom", at: "center bottom", of:document}
     });
 
-//Styles the dialog that displays the animation for solving for drop points    
+//Styles the dialog that displays the animation for solving for drop points
     $('.solvDialog').dialog({
         autoOpen:false,
         closeText:'',
@@ -141,9 +141,9 @@ function initialize(){
         width:400,
         dialogClass:"ui-solv",
         show:{effect:'fade', duration: 450},
-        hide:{effect:'fade',duration:350},     
+        hide:{effect:'fade',duration:350},
     });
-    
+
 //Styles the initial instructions popup text
      $( '.initInfo').dialog({
         autoOpen:true,
@@ -155,33 +155,33 @@ function initialize(){
         width:700,
         position:[((width/2) - 350), -550],
         show:{effect:'fade', duration: 350},
-        hide:{effect:'fade',duration:350}    
+        hide:{effect:'fade',duration:350}
     });
-   
+
 //styles the two buttons popup stuff
     $('.polyCommands').dialog({
         autoOpen:false,
         buttons:[
         {
-          
+
            text:"Solve Drop Points",
            click:function()
            {
              //solve for drop points
-               solvePoints();       
+               solvePoints();
            },
            class:"ui-button-4"
         },
         {
-          
+
            text:"View Bound Points",
            click:function()
-           {    
+           {
                $('.polyCommands').dialog("close");
                getPoints();
                 markDropPoints();
            },
-           class:"ui-button-5"                                   
+           class:"ui-button-5"
         }],
         dialogClass:"ui-poly",
         closeText:"",
@@ -192,27 +192,27 @@ function initialize(){
         position:{ my: "center bottom", at: "center bottom", of: $("#map-canvas")},
         show:{effect:'fade', duration: 350},
         hide:{effect:'fade',duration:200},
-       
-    });    
-   
+
+    });
+
     createDummyCoords();
-   
+
 }
 
 
 function isTouchSupported() {
     var msTouchEnabled = window.navigator.msMaxTouchPoints;
     var generalTouchEnabled = "ontouchstart" in document.createElement("div");
- 
+
     if (msTouchEnabled || generalTouchEnabled) {
         return true;
     }
     return false;
 }
-//Solves for drop points 
+//Solves for drop points
 //Sends the boundary points to the server
 function sendPoints(){
-   
+
     var vertices = shape.getPath();
     var verticesArray = vertices.getArray();
     var verticesString = '';
@@ -221,7 +221,7 @@ function sendPoints(){
         var lat = Math.round(verticesArray[i].lat()*10000)/10000;
         var long = Math.round(verticesArray[i].lng()*10000)/10000;
         verticesString += lat.toString() + " " + long.toString() + " ";
-    }       
+    }
     ws.send(verticesString);
 }
 //what happens when you click the solve for drop points button
@@ -232,13 +232,13 @@ function solvePoints(){
     shape.setOptions({clickable:false});
     google.maps.event.clearListeners(map, 'click');
     $(".polyCommands").dialog("close");
-    
+
     sendPoints();
-    
+
     //once it finishes solving, new buttons popup
    setTimeout(function(){ $(".polyCommands").dialog
     ({
-        autoOpen:false, 
+        autoOpen:false,
         buttons: [{
             text:"View UAV Status",
             click:function(){
@@ -247,10 +247,10 @@ function solvePoints(){
                 $(".uavDialog").dialog("open");
                 },500);
                 if (armReady)
-                {   
+                {
                 }
                 else if (launchReady)
-                { 
+                {
                     $('.uavDialog').html("<div class = \"polyInner\" > Ready to </div>");
                     $( '.uavDialog').dialog({
                         buttons:
@@ -270,7 +270,7 @@ function solvePoints(){
                 }
              },
             class:"ui-button-6"
-         },          
+         },
          {
             text:"View Drop Points",
             click:function(){
@@ -282,25 +282,25 @@ function solvePoints(){
     ]});},200);
     setTimeout(function(){ $(".polyCommands").dialog("open");}, 200);
     var  u = 0;
-    setInterval(function(){ 
+    setInterval(function(){
       if (u < 14)
         {
-          markDropPoints(); 
+          markDropPoints();
           u++;
         }}, 1000);
-    //initUAV();    
+    //initUAV();
 }
 
 //populates dialog with drop points
 function getDropPoints(){
     if (typeof msg === 'undefined')
-     { 
+     {
        setTimeout(function(){$(".pointsDialog").dialog("open");},300);
       $(".pointsDialog").html("<div class = \"innerPointsDialog\">" + "<h2>&nbsp;Drop Points</h2> " + "Drop Points not retrieved" + "</div>");
      }
      else
      {
-      themsg = msg.toString();  
+      themsg = msg.toString();
       msgparts = themsg.split(" ");
       msgstring = "";
     for (var i = 0; i <msgparts.length;i+=2)
@@ -316,7 +316,7 @@ function getDropPoints(){
      }
 }
 
-//populates dialog with boundary points 
+//populates dialog with boundary points
 function getPoints(){
     var vertices = shape.getPath();
     var verticesArray = vertices.getArray();
@@ -332,7 +332,7 @@ function getPoints(){
         if ($(".pointsDialog").dialog("isOpen") == false)
         {
            setTimeout(function(){$(".pointsDialog").dialog("open");},300);
-           
+
             $(".pointsDialog").html("<div class = \"innerPointsDialog\">" + "<h2>&nbsp;Boundary Points</h2> " + verticesString + "</div>");
         }
     }
@@ -364,18 +364,18 @@ function getCoords(){
         coords.push({x:lat,y:lng});
     }
     return coords;
-} 
+}
 }
 
 function createDummyCoords(){
    var sampleLat = [42.3631,  42.3632, 42.3633,  42.3634, 42.3635];
     var sampleLng = [-71.0922, -71.09215, -71.0921,-71.09205, -71.0920, -71.09195, -71.0919, -71.09185,-71.0918];
-    
+
     for (var i = 0; i<sampleLat.length;i++)
     {
         for (var j=0; j< sampleLng.length;j++)
         {
-          dummyCoords.push({x:sampleLat[i], y:sampleLng[j]});          
+          dummyCoords.push({x:sampleLat[i], y:sampleLng[j]});
         }
     }
 }
@@ -389,13 +389,13 @@ function getCurLoc(a)
    // loc.push(temp[i].x);
    // loc.push(temp[i].y);
    // return loc;
-    
-    
+
+
     return dummyCoords[a];
 }
 
 function initUAV()
-{  
+{
     var aSymbol = {
     path: 'M -10,0 0,-10 10,0 0,10 z',
     strokeColor: '#336600',
@@ -433,13 +433,13 @@ function mark(x){
 }
 
 //simulates the coverage area of the devices
-function markDropPoints(){ 
+function markDropPoints(){
 
     var coords = getCoords();
     for (var i = 0; i<coords.length; i++)
     {
         var myLatLng = new google.maps.LatLng(coords[i].x, coords[i].y);
-        var theMarker = new google.maps.Marker({       
+        var theMarker = new google.maps.Marker({
         position: myLatLng,
         map: map,
         icon:
@@ -447,15 +447,15 @@ function markDropPoints(){
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 3,
                 strokeColor: '#808080'
-            },  
+            },
         });
-        markerArray[markerArray.length] = theMarker;   
+        markerArray[markerArray.length] = theMarker;
     }
     //drawCircles();
 }
 
 function drawCircles()
-{ 
+{
     var coords = getCoords();
     for (var i = 0;i<coords.length; i++)
     {
@@ -464,14 +464,14 @@ function drawCircles()
             strokeColor: '#FF0000',
             strokeOpacity: 0.8,
             strokeWeight: 10,
-            fillColor: '#FF0000',    
+            fillColor: '#FF0000',
             fillOpacity: 0.35,
             map: map,
-            center: myLatLng,            
+            center: myLatLng,
             radius: 5
         };
         theCircle = new google.maps.Circle(circleOptions);
-        circleArray[circleArray.length] = theCircle;  
+        circleArray[circleArray.length] = theCircle;
     }
 }
 
@@ -479,7 +479,7 @@ function drawCircles()
 function addPoint(e) {
   var vertices = shape.getPath();
   vertices.push(e.latLng);
-  var varray = vertices.getArray(); 
+  var varray = vertices.getArray();
   if (varray.length == 1)
   {
      $(".initInfo").dialog("close");
@@ -490,8 +490,8 @@ function addPoint(e) {
   }
 }
 //remove point from polygon with doubleclick on the point
-           
-var removePoint = function(mev) { 
+
+var removePoint = function(mev) {
   if (mev.vertex != null) {
     shape.getPath().removeAt(mev.vertex);
   }
