@@ -17,7 +17,7 @@ function [waypoints, WPstring] = CalcDropPointsTest(pos)
 % CHANGE TO LOCATION OF DOMAIN OPTIMIZATION FOLDER ON COMPUTER USED
 
 % addpath '/Users/zackbright/Documents/MATLAB/Domain Optimization/';
-addpath '/Users/DSamson/Dropbox/ISN/Test/MatLab code to calculate DropPoints/Domain Optimization/';
+addpath 'C:\Users\dsamson\Documents\ServerDroneCode\DroneWeb\MatLab code to calculate DropPoints\Domain Optimization\';
 pyname = 'Sorting_Methods_Reduced_SERVER_Implement.py';
 
 pos = [pos; pos(1,:)];
