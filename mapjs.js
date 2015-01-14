@@ -1,4 +1,4 @@
-var host = "18.111.58.58";
+var host = "18.125.2.98";
 var shape;
 var points;
 var map;
