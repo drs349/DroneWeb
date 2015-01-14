@@ -1,4 +1,4 @@
-var host = "18.189.56.33";
+var host = "18.111.58.58";
 var shape;
 var points;
 var map;
@@ -295,7 +295,7 @@ function solvePoints(){
 function getDropPoints(){
     if (typeof msg === 'undefined')
      {
-       setTimeout(function(){$(".pointsDialog").dialog("open");},300);
+       setTimeout(function(){$(".pointsDialog").dialog("open");},1500);
       $(".pointsDialog").html("<div class = \"innerPointsDialog\">" + "<h2>&nbsp;Drop Points</h2> " + "Drop Points not retrieved" + "</div>");
      }
      else
